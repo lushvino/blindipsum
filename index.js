@@ -34,7 +34,7 @@ BlindIpsum.prototype.generate = function(options) {
 
     // Sentance Unit helper
     var isSentance = function() {
-        return self.options.units === 's' ||  self.options.units === 'sentance';
+        return self.options.unit === 's' ||  self.options.unit === 'sentance';
     }
 
 
