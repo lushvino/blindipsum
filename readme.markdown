@@ -1,7 +1,5 @@
 [![Build Status](https://travis-ci.org/lushvino/blindipsum.png?branch=master)](https://travis-ci.org/lushvino/blindipsum)
 
-** NOT READY FOR PRIME TIME JUST YET **
-
 ### Blind Ipsum
 
 Blind Ipsum is a module/for the node.js platform that can generate passages of lorem ipsum text using provided word dictionaries.
@@ -12,9 +10,14 @@ This module was inspired and derived from the [node-lorem-ipsum](https://raw.git
 npm install blindipsum 
 ```
 
-### MORE TO COME
+### Useage
 
-## Using Blind Ipsum
+TBD .. see [Vino Ipsum](https://github.com/lushvino/vinoipsum) for a useage example
+
+
+
+
+## Things Blind Ipsum
 
 * [Vino Ipsum](https://github.com/lushvino/vinoipsum)
 

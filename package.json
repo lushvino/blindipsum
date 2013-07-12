@@ -10,7 +10,8 @@
     "keywords": [
         "lorem",
         "ipsum",
-        "loremipsum"
+        "loremipsum",
+        "placeholder"
     ],
     "dependencies": {
         "optimist": "~0.5.1"
