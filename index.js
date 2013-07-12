@@ -15,7 +15,7 @@ function BlindIpsum(opts) {
             max: 7             // Maximum words in a paragraph
         },
         prefix: '',            // output prefix, ex: for html set to '<p>'
-        suffix: '',            // output prefix, ex: for html set to '</p>'
+        suffix: '\r\n',        // output prefix, ex: for html set to '</p>'
         format: 'plain',       // format of output. Valid are 'plain', 'html', 'json'
         unit: 'paragraph'      // Type: Vaid are 'paragraph', 'sentance', 'word'
     };
