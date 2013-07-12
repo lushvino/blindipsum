@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/lushvino/blindipsum.png?branch=master)](https://travis-ci.org/lushvino/blindipsum)
 
+** NOT READY FOR PRIME TIME JUST YET **
 
 ### Blind Ipsum
 
@@ -12,6 +13,10 @@ npm install blindipsum
 ```
 
 ### MORE TO COME
+
+## Using Blind Ipsum
+
+* [Vino Ipsum](https://github.com/lushvino/vinoipsum)
 
 ### License
 
