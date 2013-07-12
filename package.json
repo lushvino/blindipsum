@@ -1,0 +1,30 @@
+{
+    "name": "blindipsum",
+    "version": "0.0.1",
+    "description": "generic lorem ipsum generator",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lushvino/blindipsum.git"
+    },
+    "keywords": [
+        "lorem",
+        "ipsum",
+        "loremipsum"
+    ],
+    "dependencies": {
+        "optimist": "~0.5.1"
+    },
+    "devDependencies": {
+        "tap": "~0.4.3"
+    },
+    "author" : {
+        "name" : "Mark Lussier",
+        "email" : "mark@lushvino.com",
+        "url" : "http://lushvino.com"
+    },
+    "scripts" : {
+        "test": "tap test/*.js"
+    },
+    "license" : "MIT"
+}
