@@ -1,23 +1,52 @@
-var blindipsum = function(args) {
+module.exports = function(opts) {
+    return new BlindIpsum(opts);
+}
 
-    var sentance_min  =  4;
-    var sentance_max  =  15;
-    var paragraph_min =  3;
-    var paragraph_max =  7;
-    var count         = args.count || 1;
-    var convert_utf8  = args.utf8 || true;
+function BlindIpsum(opts) {
+    var defaults = {
+        count: 1,              // Number of "units" to generate
+        utf8: true,            // Force UTF-8
+        sentance: {
+            min: 4,            // Minimum words in a sentance
+            max: 15            // Maximum words in a sentance
+        },
+        paragraph: {
+            min: 3,            // Minimum words in a paragraph
+            max: 7             // Maximum words in a paragraph
+        },
+        prefix: '',            // output prefix, ex: for html set to '<p>'
+        suffix: '',            // output prefix, ex: for html set to '</p>'
+        format: 'plain',       // format of output. Valid are 'plain', 'html', 'json'
+        unit: 'paragraph'      // Type: Vaid are 'paragraph', 'sentance', 'word'
+    };
 
-    // Dictionary of Wine Terms and Filler words
-    var dictionary    = require('./data/dictionary.js')
+    this.options = extend( {}, defaults, opts);
+}
+
+BlindIpsum.prototype.setDictionary = function(dictionary) {
+    this.dictionary = dictionary;
+}
+
+BlindIpsum.prototype.generate = function(options) {
+    var self = this;
+
+    this.options = extend({},this.options, options);
+
+    // Sentance Unit helper
+    var isSentance = function() {
+        return self.options.units === 's' ||  self.options.units === 'sentance';
+    }
+
 
     // Generate Random Number
     var randomNumber = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
      };
 
+
     // Grab a random work from the dictionary
     var randomDictionaryWord = function(words) {
-        return dictionary.words[randomNumber(0, dictionary.words.length - 1)];
+        return self.dictionary.words[randomNumber(0, self.dictionary.words.length - 1)];
     };
 
 
@@ -25,7 +54,7 @@ var blindipsum = function(args) {
     var generateRandomSentence = function(words, min, max) {
         var sentence = '';
         var word_min = 0;
-        var word_max = randomNumber(min, max)
+        var word_max = randomNumber(min, max);
 
         while (word_min < word_max) {
             sentence += ' ' + randomDictionaryWord(words);
@@ -63,33 +92,39 @@ var blindipsum = function(args) {
 
     var iter = 0
     var min = 0;
-    var max = count;
+    var max = this.options.count;
     var string = '';
-    var prefix = '';
-    var suffix = "\r\n";
+    var prefix = this.options.prefix;
+    var suffix = this.options.suffix;
 
-    if (args.html) {
+    if (options.format == 'html') {
       prefix = '<p>';
       suffix = '</p>';
     }
 
-    if (args.json ) {
+    if (options.format == 'json') {
         suffix = '';
         prefix = '';
     }
 
     while (min < max) {
 
-        if (args.w || args.word) {
-            string += ' ' + randomDictionaryWord(dictionary.words);
+        if (this.options.unit === 'w' || this.options.unit === 'word') {
+            string += ' ' + randomDictionaryWord(this.dictionary.words);
         }
 
-        if (args.s || args.sentence) {
-            string += '. ' + generateRandomSentence(dictionary.words, sentance_min, sentance_max);
+        if ( isSentance() ) {
+            string += '. ' + generateRandomSentence(this.dictionary.words,
+                                                    this.options.sentance.min,
+                                                    this.options.sentance.max);
         }
 
-        if (args.p || args.paragraph) {
-            string += prefix + generateRandomParagraph(dictionary.words, paragraph_min, paragraph_max, sentance_min, sentance_max) + suffix;
+        if (this.options.unit === 'p' || this.options.unit === 'paragraph') {
+            string += prefix + generateRandomParagraph(this.dictionary.words,
+                                                       this.options.paragraph.min,
+                                                       this.options.paragraph.max,
+                                                       this.options.sentance.min,
+                                                       this.options.sentance.max) + suffix;
         }
         min += 1;
     }
@@ -105,17 +140,17 @@ var blindipsum = function(args) {
 
         string = string.slice(pos);
 
-        if (args.s || args.sentence) {
+        if ( isSentance() ){
           string = string + '.';
         }
     }
 
-    if (convert_utf8) {
+    if (this.options.utf8) {
         string = new Buffer(string).toString('utf-8');
     }
 
-    if (args.json  ) {
-        string = { vinoipsum: string };
+    if (this.options.format === 'json'  ) {
+        string = { ipsum: string };
     }
 
 
@@ -123,4 +158,12 @@ var blindipsum = function(args) {
 
 };
 
-module.exports = blindipsum
+function extend(target) {
+    var sources = [].slice.call(arguments, 1);
+    sources.forEach(function (source) {
+        for (var prop in source) {
+            target[prop] = source[prop];
+        }
+    });
+    return target;
+}
