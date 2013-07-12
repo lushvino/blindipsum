@@ -97,12 +97,12 @@ BlindIpsum.prototype.generate = function(options) {
     var prefix = this.options.prefix;
     var suffix = this.options.suffix;
 
-    if (options.format == 'html') {
+    if (this.options.format == 'html') {
       prefix = '<p>';
       suffix = '</p>';
     }
 
-    if (options.format == 'json') {
+    if (this.options.format == 'json') {
         suffix = '';
         prefix = '';
     }
