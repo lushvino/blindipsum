@@ -6,9 +6,9 @@ function BlindIpsum(opts) {
     var defaults = {
         count: 1,              // Number of "units" to generate
         utf8: true,            // Force UTF-8
-        sentance: {
-            min: 4,            // Minimum words in a sentance
-            max: 15            // Maximum words in a sentance
+        sentence: {
+            min: 4,            // Minimum words in a sentence
+            max: 15            // Maximum words in a sentence
         },
         paragraph: {
             min: 3,            // Minimum words in a paragraph
@@ -17,7 +17,8 @@ function BlindIpsum(opts) {
         prefix: '',            // output prefix, ex: for html set to '<p>'
         suffix: '\r\n',        // output prefix, ex: for html set to '</p>'
         format: 'plain',       // format of output. Valid are 'plain', 'html', 'json'
-        unit: 'paragraph'      // Type: Vaid are 'paragraph', 'sentance', 'word'
+        unit: 'paragraph',     // Type: Vaid are 'paragraph', 'sentence', 'word'
+        commas: true           // Include some commans in sentences
     };
 
     this.options = extend( {}, defaults, opts);
@@ -34,7 +35,7 @@ BlindIpsum.prototype.generate = function(options) {
 
     // Sentance Unit helper
     var isSentance = function() {
-        return self.options.unit === 's' ||  self.options.unit === 'sentance';
+        return self.options.unit === 's' ||  self.options.unit === 'sentence';
     }
 
 
@@ -50,14 +51,23 @@ BlindIpsum.prototype.generate = function(options) {
     };
 
 
-    // Generate a sentance
+    // Generate a sentence
     var generateRandomSentence = function(words, min, max) {
         var sentence = '';
         var word_min = 0;
         var word_max = randomNumber(min, max);
 
+        var include_commas = self.options.commas && word_max >= 7 && ( randomNumber(0,2) > 0);
+
+
         while (word_min < word_max) {
             sentence += ' ' + randomDictionaryWord(words);
+            if ( (word_min >= 3) && (word_min != ( word_max - 1) ) && include_commas ) {
+                if ( randomNumber(0,1) == 1 ) {
+                    sentence += ',';
+                    include_commas = false;
+                }
+            }
             word_min +=  1;
         }
 
@@ -115,16 +125,16 @@ BlindIpsum.prototype.generate = function(options) {
 
         if ( isSentance() ) {
             string += '. ' + generateRandomSentence(this.dictionary.words,
-                                                    this.options.sentance.min,
-                                                    this.options.sentance.max);
+                                                    this.options.sentence.min,
+                                                    this.options.sentence.max);
         }
 
         if (this.options.unit === 'p' || this.options.unit === 'paragraph') {
             string += prefix + generateRandomParagraph(this.dictionary.words,
                                                        this.options.paragraph.min,
                                                        this.options.paragraph.max,
-                                                       this.options.sentance.min,
-                                                       this.options.sentance.max) + suffix;
+                                                       this.options.sentence.min,
+                                                       this.options.sentence.max) + suffix;
         }
         min += 1;
     }
