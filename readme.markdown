@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/lushvino/blindipsum.png?branch=master)](https://travis-ci.org/lushvino/blindipsum)
 
+[![Dependency Status](https://david-dm.org/intabulas/blindipsum.png)]()
+
 ### Blind Ipsum
 
 Blind Ipsum is a module/for the node.js platform that can generate passages of lorem ipsum text using provided word dictionaries.
