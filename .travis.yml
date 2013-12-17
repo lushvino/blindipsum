@@ -2,3 +2,9 @@ language: node_js
 node_js:
   - 0.8
   - 0.10
+notifications:
+  webhooks:
+     urls:
+       - https://lushvino.slack.com/services/hooks/travis?token=jzAPdXHdMm2RhL3JAxjy5Lp0
+     on_success: always
+     on_failure: always
