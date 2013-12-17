@@ -1,6 +1,6 @@
 {
     "name": "blindipsum",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "generic lorem ipsum generator",
     "main": "index.js",
     "repository": {
@@ -14,7 +14,7 @@
         "placeholder"
     ],
     "dependencies": {
-        "optimist": "~0.5.1"
+        "optimist": "~0.6.0"
     },
     "devDependencies": {
         "tap": "~0.4.3"

@@ -1,6 +1,6 @@
 module.exports = function(opts) {
     return new BlindIpsum(opts);
-}
+};
 
 function BlindIpsum(opts) {
     var defaults = {
@@ -26,7 +26,7 @@ function BlindIpsum(opts) {
 
 BlindIpsum.prototype.setDictionary = function(dictionary) {
     this.dictionary = dictionary;
-}
+};
 
 BlindIpsum.prototype.generate = function(options) {
     var self = this;
@@ -36,20 +36,17 @@ BlindIpsum.prototype.generate = function(options) {
     // Sentance Unit helper
     var isSentance = function() {
         return self.options.unit === 's' ||  self.options.unit === 'sentence';
-    }
-
+    };
 
     // Generate Random Number
     var randomNumber = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
      };
 
-
     // Grab a random work from the dictionary
     var randomDictionaryWord = function(words) {
         return self.dictionary.words[randomNumber(0, self.dictionary.words.length - 1)];
     };
-
 
     // Generate a sentence
     var generateRandomSentence = function(words, min, max) {
@@ -58,7 +55,6 @@ BlindIpsum.prototype.generate = function(options) {
         var word_max = randomNumber(min, max);
 
         var include_commas = self.options.commas && word_max >= 7 && ( randomNumber(0,2) > 0);
-
 
         while (word_min < word_max) {
             sentence += ' ' + randomDictionaryWord(words);
@@ -100,7 +96,7 @@ BlindIpsum.prototype.generate = function(options) {
     };
 
 
-    var iter = 0
+    var iter = 0;
     var min = 0;
     var max = this.options.count;
     var string = '';
@@ -162,7 +158,6 @@ BlindIpsum.prototype.generate = function(options) {
     if (this.options.format === 'json'  ) {
         string = { ipsum: string };
     }
-
 
     return string;
 
