@@ -53,12 +53,11 @@ BlindIpsum.prototype.generate = function(options) {
         var sentence = '';
         var word_min = 0;
         var word_max = randomNumber(min, max);
-
         var include_commas = self.options.commas && word_max >= 7 && ( randomNumber(0,2) > 0);
 
         while (word_min < word_max) {
             sentence += ' ' + randomDictionaryWord(words);
-            if ( (word_min >= 3) && (word_min != ( word_max - 1) ) && include_commas ) {
+            if ( (word_min >= 3) && (word_min !== ( word_max - 1) ) && include_commas ) {
                 if ( randomNumber(0,1) == 1 ) {
                     sentence += ',';
                     include_commas = false;

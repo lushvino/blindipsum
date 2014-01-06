@@ -1,6 +1,6 @@
 {
     "name": "blindipsum",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "generic lorem ipsum generator",
     "main": "index.js",
     "repository": {
