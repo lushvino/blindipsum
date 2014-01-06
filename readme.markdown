@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/lushvino/blindipsum.png?branch=master)](https://travis-ci.org/lushvino/blindipsum)
 
-[![Dependency Status](https://david-dm.org/intabulas/blindipsum.png)]()
+[![Dependency Status](https://david-dm.org/lushvino/blindipsum.png)]()
 
 ### Blind Ipsum
 
@@ -9,7 +9,7 @@ Blind Ipsum is a module/for the node.js platform that can generate passages of l
 This module was inspired and derived from the [node-lorem-ipsum](https://raw.github.com/knicklabs/node-lorem-ipsum) module fron [kicklabs](https://github.com/knicklabs)
 
 ```bash
-npm install blindipsum 
+npm install blindipsum
 ```
 
 ### Useage
