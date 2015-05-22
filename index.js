@@ -1,6 +1,14 @@
-module.exports = function(opts) {
-    return new BlindIpsum(opts);
-};
+'use strict';
+
+function extend(target) {
+    var sources = [].slice.call(arguments, 1);
+    sources.forEach(function (source) {
+        for (var prop in source) {
+            target[prop] = source[prop];
+        }
+    });
+    return target;
+}
 
 function BlindIpsum(opts) {
     var defaults = {
@@ -31,11 +39,11 @@ BlindIpsum.prototype.setDictionary = function(dictionary) {
 BlindIpsum.prototype.generate = function(options) {
     var self = this;
 
-    this.options = extend({},this.options, options);
+    this.options = extend({}, this.options, options);
 
     // Sentance Unit helper
     var isSentance = function() {
-        return self.options.unit === 's' ||  self.options.unit === 'sentence';
+        return self.options.unit === 's' || self.options.unit === 'sentence';
     };
 
     // Generate Random Number
@@ -63,7 +71,7 @@ BlindIpsum.prototype.generate = function(options) {
                     include_commas = false;
                 }
             }
-            word_min +=  1;
+            word_min += 1;
         }
 
         if (sentence.length) {
@@ -162,12 +170,6 @@ BlindIpsum.prototype.generate = function(options) {
 
 };
 
-function extend(target) {
-    var sources = [].slice.call(arguments, 1);
-    sources.forEach(function (source) {
-        for (var prop in source) {
-            target[prop] = source[prop];
-        }
-    });
-    return target;
-}
+module.exports = function(opts) {
+    return new BlindIpsum(opts);
+};
